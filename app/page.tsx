@@ -48,7 +48,8 @@ export default async function Home() {
 								</h3>
 
 								<p className="mt-1 text-sm text-slate-400">
-									{movie.year ?? "Release Year Unknown"} • {movie.genres.join(", ")}
+									{movie.year ?? "Release Year Unknown"} •{" "}
+									{movie.genres.join(", ")}
 								</p>
 							</div>
 						</Link>
