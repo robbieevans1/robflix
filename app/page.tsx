@@ -14,7 +14,7 @@ export default async function Home() {
       <section className="mb-10">
         <h1 className="text-5xl font-bold">Public Domain Movies</h1>
         <p className="mt-4 max-w-2xl text-slate-300">
-          Watch classic films for free from public-domain and open media archives.
+          Watch films for free from public-domain and open media archives!
         </p>
       </section>
 
