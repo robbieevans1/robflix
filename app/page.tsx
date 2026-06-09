@@ -10,14 +10,14 @@ export default async function Home() {
 	});
 
 	return (
-		<main className="min-h-screen bg-slate-950 px-8 py-10 text-white">
+		<main className="min-h-screen px-8 py-10 text-white">
+			{" "}
 			<section className="mb-10">
 				<h1 className="text-5xl font-bold">Public Domain Movies</h1>
 				<p className="mt-4 max-w-2xl text-slate-300">
 					Watch films for free from public-domain and open media archives!
 				</p>
 			</section>
-
 			<section>
 				<h2 className="mb-4 text-2xl font-semibold">Featured Movies</h2>
 
@@ -26,8 +26,7 @@ export default async function Home() {
 						<Link
 							key={movie.id}
 							href={`/movies/${movie.slug}`}
-							className="overflow-hidden rounded-lg bg-slate-900 transition hover:scale-105"
-						>
+className="overflow-hidden rounded-lg border border-red-950/40 bg-black/60 shadow-xl backdrop-blur transition hover:scale-105 hover:border-red-500/60"						>
 							<div className="aspect-[2/3] w-full overflow-hidden bg-slate-800">
 								{movie.posterUrl ? (
 									<img
