@@ -1,4 +1,6 @@
 # Robflix
+<img width="2864" height="1488" alt="image" src="https://github.com/user-attachments/assets/fe24ac20-d4b0-41b9-9baf-3e73ceb9570c" />
+
 
 Robflix is a Netflix-inspired public-domain movie browsing app built with Next.js. The app displays a catalog of classic movies, stores movie metadata in a PostgreSQL database, and embeds videos from Internet Archive so the app does not need to host large video files directly.
 
