@@ -26,7 +26,8 @@ export default async function Home() {
 						<Link
 							key={movie.id}
 							href={`/movies/${movie.slug}`}
-className="overflow-hidden rounded-lg border border-red-950/40 bg-black/60 shadow-xl backdrop-blur transition hover:scale-105 hover:border-red-500/60"						>
+							className="overflow-hidden rounded-lg border border-red-950/40 bg-black/60 shadow-xl backdrop-blur transition hover:scale-105 hover:border-red-500/60"
+						>
 							<div className="aspect-[2/3] w-full overflow-hidden bg-slate-800">
 								{movie.posterUrl ? (
 									<img
