@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import AuthButton from "./AuthButtons";
 
 export default function Navbar() {
   return (
@@ -25,6 +25,8 @@ export default function Navbar() {
           <Link href="/about" className="hover:text-white">
             About
           </Link>
+          <AuthButton />
+
         </div>
       </nav>
     </header>  )
