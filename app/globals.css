@@ -29,3 +29,32 @@ body {
     radial-gradient(circle at 50% 100%, rgba(127, 29, 29, 0.14), transparent 45%),
     linear-gradient(135deg, #000000 0%, #020617 60%, #0b0101 100%);
 }
+
+.movie-card-title {
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.movie-card-title-track {
+	display: inline-flex;
+	max-width: max-content;
+	transform: translateX(0);
+}
+
+.movie-card-title-copy {
+	padding-right: 2rem;
+}
+
+.movie-card:hover .movie-card-title-scroll .movie-card-title-track {
+	animation: movie-title-scroll 8s linear infinite;
+}
+
+@keyframes movie-title-scroll {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-50%);
+	}
+}

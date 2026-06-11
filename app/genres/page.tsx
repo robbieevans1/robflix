@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
+import MovieTitle from "@/components/MovieTitle";
 
 const genres = [
 	"Horror",
@@ -105,7 +106,7 @@ export default async function GenresPage({ searchParams }: GenresPageProps) {
 								<Link
 									key={movie.id}
 									href={`/movies/${movie.slug}`}
-									className="overflow-hidden rounded-lg border border-red-950/30 bg-black/70 shadow-lg backdrop-blur transition hover:scale-105 hover:border-red-500/50"
+									className="movie-card overflow-hidden rounded-lg border border-red-950/30 bg-black/70 shadow-lg backdrop-blur transition hover:scale-105 hover:border-red-500/50"
 								>
 									<div className="aspect-[2/3] w-full overflow-hidden bg-slate-800">
 										{movie.posterUrl ? (
@@ -122,9 +123,8 @@ export default async function GenresPage({ searchParams }: GenresPageProps) {
 									</div>
 
 									<div className="p-4">
-										<h3 className="line-clamp-1 text-lg font-bold">
-											{movie.title}
-										</h3>
+										<MovieTitle title={movie.title} />
+                    
 
 										<p className="mt-1 text-sm text-slate-400">
 											{movie.year ?? "Unknown"} • {movie.genres.join(", ")}
