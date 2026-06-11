@@ -1,8 +1,12 @@
 import { auth } from "@/auth";
-
+import { redirect } from "next/navigation";
 
 export default async function SecretPage() {
 	const session = await auth();
+
+	if (!session?.user) {
+		redirect("/");
+	}
 
 	return (
 		<main className="min-h-screen px-6 py-12 text-white">
@@ -14,8 +18,8 @@ export default async function SecretPage() {
 				<h1 className="mb-4 text-4xl font-bold">Secret Robflix Page</h1>
 
 				<p className="mb-6 text-lg leading-8 text-slate-300">
-					You have found the secret page! This page can only be viewed by users who are signed in with GitHub.
-
+					You have found the secret page! This page can only be viewed by users
+					who are signed in with GitHub.
 				</p>
 
 				<div className="rounded-lg bg-slate-950/80 p-4 text-sm text-slate-300">
