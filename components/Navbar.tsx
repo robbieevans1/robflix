@@ -1,7 +1,10 @@
 import Link from "next/link";
 import AuthButton from "./AuthButtons";
+import { auth } from "@/auth";
 
-export default function Navbar() {
+
+export default async function Navbar() {
+	const session = await auth();
 	return (
 		<header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur">
 			<nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 text-white">
@@ -29,6 +32,11 @@ export default function Navbar() {
 					<Link href="/about" className="hover:text-white">
 						About
 					</Link>
+					{session?.user ? (
+						<Link href="/secret" className="hover:text-white">
+							Secret
+						</Link>
+					) : null}
 					<AuthButton />
 				</div>
 			</nav>
