@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 
 type MovieTitleProps = {
 	title: string;
+	className?: string;
 };
 
-export default function MovieTitle({ title }: MovieTitleProps) {
+export default function MovieTitle({ title, className }: MovieTitleProps) {
 	const containerRef = useRef<HTMLHeadingElement>(null);
 	const textRef = useRef<HTMLSpanElement>(null);
 	const [isOverflowing, setIsOverflowing] = useState(false);
@@ -33,7 +34,7 @@ export default function MovieTitle({ title }: MovieTitleProps) {
 	return (
 		<h3
 			ref={containerRef}
-			className={`movie-card-title text-lg font-bold ${
+			className={`movie-card-title font-bold ${className ?? "text-lg"} ${
 				isOverflowing ? "movie-card-title-scroll" : ""
 			}`}
 			title={title}
