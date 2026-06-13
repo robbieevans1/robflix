@@ -1,60 +1,53 @@
-import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import MovieTitle from "@/components/MovieTitle";
+import { genres } from "@/lib/genres";
+import GenreCarousel from "@/components/GenreCarousel";
 
 export default async function Home() {
-	const movies = await prisma.movie.findMany({
-		take: 50,
-		orderBy: {
-			createdAt: "desc",
-		},
-	});
+	const genreSections = await Promise.all(
+		genres.map(async (genre) => {
+			const movies = await prisma.movie.findMany({
+				where: {
+					genres: {
+						has: genre,
+					},
+				},
+				take: 20,
+				orderBy: {
+					title: "asc",
+				},
+				select: {
+					id: true,
+					slug: true,
+					title: true,
+					year: true,
+					posterUrl: true,
+				},
+			});
+
+			return { genre, movies };
+		}),
+	);
+
+	const sectionsWithMovies = genreSections.filter(
+		(section) => section.movies.length > 0,
+	);
 
 	return (
 		<main className="min-h-screen px-8 py-10 text-white">
-			{" "}
 			<section className="mb-10">
 				<h1 className="text-5xl font-bold">Public Domain Movies</h1>
 				<p className="mt-4 max-w-2xl text-slate-300">
 					Watch films for free from public-domain and open media archives!
 				</p>
 			</section>
-			<section>
-				<h2 className="mb-4 text-2xl font-semibold">Featured Movies</h2>
 
-				<div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-					{movies.map((movie) => (
-						<Link
-							key={movie.id}
-							href={`/movies/${movie.slug}`}
-							className="movie-card overflow-hidden rounded-lg border border-red-950/40 bg-black/60 shadow-xl backdrop-blur transition hover:scale-105 hover:border-red-500/60"
-						>
-							<div className="aspect-[2/3] w-full overflow-hidden bg-slate-800">
-								{movie.posterUrl ? (
-									<img
-										src={movie.posterUrl}
-										alt={movie.title}
-										className="h-full w-full object-cover"
-									/>
-								) : (
-									<div className="flex h-full w-full items-center justify-center text-sm text-slate-400">
-										No Image
-									</div>
-								)}
-							</div>
-
-							<div className="p-4">
-								<MovieTitle title={movie.title} />
-
-								<p className="mt-1 text-sm text-slate-400">
-									{movie.year ?? "Release Year Unknown"} •{" "}
-									{movie.genres.join(", ")}
-								</p>
-							</div>
-						</Link>
-					))}
-				</div>
-			</section>
+			{sectionsWithMovies.length === 0 ? (
+				<p className="text-slate-400">No movies available yet.</p>
+			) : (
+				sectionsWithMovies.map(({ genre, movies }) => (
+					<GenreCarousel key={genre} genre={genre} movies={movies} />
+				))
+			)}
 		</main>
 	);
 }
